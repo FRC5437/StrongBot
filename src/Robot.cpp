@@ -8,7 +8,7 @@ class Robot: public IterativeRobot
 {
 private:
 	std::unique_ptr<Command> autonomousCommand;
-	SendableChooser *chooser;
+	//SendableChooser *chooser;
 
 	void RobotInit()
 	{
@@ -16,15 +16,11 @@ private:
 		//chooser = new SendableChooser();
 		//chooser->AddDefault("Default Auto", new ExampleCommand());
 		//chooser->AddObject("My Auto", new MyAutoCommand());
-		SmartDashboard::PutData("Auto Modes", chooser);
-		/*left_motor(1);
-		right_motor(2);
-		left_slave(3);
-		left_slave.SetControlMode(CANSpeedController::kFollower);
-		left_slave.Set(1);
-		right_slave(4);
-		right_slave.SetControlMode(CANSpeedController::kFollower);
-		right_slave.Set(2);*/
+		//SmartDashboard::PutData("Auto Modes", chooser);
+		//std::array* width;
+
+		CameraServer::GetInstance()->SetQuality(50);
+		CameraServer::GetInstance()->StartAutomaticCapture("cam0");
 	}
 
 	/**
@@ -59,7 +55,7 @@ private:
 			autonomousCommand.reset(new ExampleCommand());
 		} */
 
-		autonomousCommand.reset((Command *)chooser->GetSelected());
+		//autonomousCommand.reset((Command *)chooser->GetSelected());
 
 		if (autonomousCommand != NULL)
 			autonomousCommand->Start();
