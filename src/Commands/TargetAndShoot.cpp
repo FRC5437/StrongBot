@@ -1,66 +1,43 @@
 #include "TargetAndShoot.h"
-#include "RobotMap.h"
+#include "Commands/RobotTurnLeft.h"
+#include "Commands/RobotTurnRight.h"
+#include "Commands/ShootBoulder.h"
+#include "Target.h"
+
+
+
 
 const double CENTER_X = 160.0;
 const double TOLERANCE_X = 20.0;
-std::shared_ptr<NetworkTable> grip;
-bool fired = false;
+extern double target_x;
+
 TargetAndShoot::TargetAndShoot()
 {
-	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(chassis);
-	Requires(drivesubsystem);
-}
+	// Add Commands here:
+	// e.g. AddSequential(new Command1());
+	//      AddSequential(new Command2());
+	// these will run in order.
 
-// Called just before this Command runs the first time
-void TargetAndShoot::Initialize()
-{
-    grip = NetworkTable::GetTable("GRIP");
-}
+	// To run multiple commands at the same time,
+	// use AddParallel()
+	// e.g. AddParallel(new Command1());
+	//      AddSequential(new Command2());
+	// Command1 and Command2 will run in parallel.
 
-// Called repeatedly when this Command is scheduled to run
-void TargetAndShoot::Execute()
-{
-	auto areas = grip->GetNumberArray("myContoursReport/width", llvm::ArrayRef<double>()),
-			 xs = grip->GetNumberArray("myContoursReport/centerX", llvm::ArrayRef<double>());
+	// A command group will require all of the subsystems that each member
+	// would require.
+	// e.g. if Command1 requires chassis, and Command2 requires arm,
+	// a CommandGroup containing them would require both the chassis and the
+	// arm.
 
-	double targetArea = -1.0, targetX = 0.0;
-	for (int i = 0; i < areas.size(); i++) {
-		if (areas[i] > targetArea) {
-			targetArea = areas[i];
-			targetX = xs[i];
-		}
-	}
-
-	if (targetArea < 0.0) {
-			return;
-	}
-
+	double targetX = target_x;
+	SmartDashboard::PutNumber("targetrcv", targetX);
 	if (targetX < CENTER_X - TOLERANCE_X) {
-			drivesubsystem->Drive(0.5,-0.5);
+		AddSequential(new RobotTurnLeft());
 	} else if (targetX > CENTER_X + TOLERANCE_X) {
-			drivesubsystem->Drive(-0.5,0.5);
+		AddSequential(new RobotTurnRight());
 	} else {
-		DriverStation::ReportError("FIRE");
-		fired = true;
+		AddSequential(new ShootBoulder());
 	}
-}
-
-// Make this return true when this Command no longer needs to run execute()
-bool TargetAndShoot::IsFinished()
-{
-	return fired;
-}
-
-// Called once after isFinished returns true
-void TargetAndShoot::End()
-{
-	fired = false;
-}
-
-// Called when another command which requires one or more of the same
-// subsystems is scheduled to run
-void TargetAndShoot::Interrupted()
-{
 
 }

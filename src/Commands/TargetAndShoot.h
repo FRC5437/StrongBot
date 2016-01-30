@@ -1,18 +1,13 @@
 #ifndef TargetAndShoot_H
 #define TargetAndShoot_H
 
-#include "../CommandBase.h"
+#include "Commands/CommandGroup.h"
 #include "WPILib.h"
 
-class TargetAndShoot: public CommandBase
+class TargetAndShoot: public CommandGroup
 {
 public:
 	TargetAndShoot();
-	void Initialize();
-	void Execute();
-	bool IsFinished();
-	void End();
-	void Interrupted();
 };
 
 #endif

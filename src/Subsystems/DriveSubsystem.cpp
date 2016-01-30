@@ -29,6 +29,6 @@ void DriveSubsystem::Drive(double left, double right) {
 	myDrive->TankDrive(left, right);
 }
 
-void DriveSubsystem::Drive(Joystick* joy) {
-	Drive(-joy->GetRawAxis(1), -joy->GetRawAxis(5));
+void DriveSubsystem::Drive(Joystick* joy1, Joystick* joy2) {
+	Drive(-joy1->GetRawAxis(1), -joy2->GetRawAxis(1));
 }
