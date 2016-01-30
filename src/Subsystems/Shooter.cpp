@@ -1,14 +1,16 @@
 #include "Shooter.h"
 #include "../RobotMap.h"
+
+
 CANTalon* left_wheel;
+CANTalon* right_wheel;
+
+
 Shooter::Shooter() :
 		Subsystem("Shooter")
 {
 	left_wheel = new CANTalon(5);
-	CANTalon* right_wheel = new CANTalon(6);
-	right_wheel->SetControlMode(CANSpeedController::kFollower);
-	right_wheel->SetClosedLoopOutputDirection(true);
-	right_wheel->Set(5);
+	right_wheel = new CANTalon(6);
 }
 
 void Shooter::InitDefaultCommand()
@@ -21,4 +23,10 @@ void Shooter::InitDefaultCommand()
 // here. Call these from Commands.
 void Shooter::Fire() {
 	left_wheel->Set(-1.0);
+	right_wheel->Set(1.0);
+}
+
+void Shooter::Stop() {
+	left_wheel->Set(0.0);
+	right_wheel->Set(0.0);
 }

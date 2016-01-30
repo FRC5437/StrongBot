@@ -4,6 +4,8 @@
 #include <string>
 #include "Commands/Command.h"
 #include "Subsystems/DriveSubsystem.h"
+#include "Subsystems/Shooter.h"
+#include "Subsystems/Targeting.h"
 #include "OI.h"
 #include "WPILib.h"
 
@@ -22,6 +24,7 @@ public:
 	static OI* oi;
 	static DriveSubsystem* drivesubsystem;
 	static Shooter* shooter;
+	static Targeting* targeting;
 };
 
 #endif

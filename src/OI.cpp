@@ -15,7 +15,7 @@ OI::OI()
 	b22 = new JoystickButton(joy2, 2);
 
 	b11->WhenPressed(new TargetAndShoot());
-	b21->WhenPressed(new ShootBoulder());
+	b21->ToggleWhenPressed(new ShootBoulder());
 	b22->WhenPressed(new Target());
 	//b2->WhenPressed();
 }

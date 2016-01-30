@@ -6,6 +6,7 @@ ShootBoulder::ShootBoulder()
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(shooter);
+	SetTimeout(0.1);
 }
 
 // Called just before this Command runs the first time
@@ -18,20 +19,19 @@ void ShootBoulder::Initialize()
 void ShootBoulder::Execute()
 {
 	shooter->Fire();
-	fired = true;
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ShootBoulder::IsFinished()
 {
-	return fired;
+	return IsTimedOut();
 }
 
 // Called once after isFinished returns true
 void ShootBoulder::End()
 {
-	fired = false;
+	shooter->Stop();
 }
 
 // Called when another command which requires one or more of the same

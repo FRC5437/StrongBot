@@ -13,6 +13,7 @@ public:
 	Shooter();
 	void InitDefaultCommand();
 	void Fire();
+	void Stop();
 };
 
 #endif
