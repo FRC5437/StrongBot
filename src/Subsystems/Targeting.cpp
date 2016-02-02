@@ -2,9 +2,8 @@
 #include "../RobotMap.h"
 #include "Commands/Target.h"
 
-extern double target_x;
-Targeting::Targeting() : Subsystem("ExampleSubsystem") {
-
+Targeting::Targeting() : Subsystem("targeting") {
+	targetx = 0;
 }
 
 void Targeting::InitDefaultCommand()
@@ -16,6 +15,12 @@ void Targeting::InitDefaultCommand()
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-void Targeting::FindTarget() {
+void Targeting::SetTarget(double targetX) {
+	targetx = targetX;
+}
+
+double Targeting::Report() {
+	SmartDashboard::PutNumber("target", targetx);
+	return targetx;
 
 }

@@ -5,7 +5,7 @@ RobotTurnLeft::RobotTurnLeft()
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(drivesubsystem);
-	SetTimeout(1);
+	SetTimeout(0.1);
 }
 
 // Called just before this Command runs the first time

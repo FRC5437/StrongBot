@@ -22,8 +22,13 @@ void Shooter::InitDefaultCommand()
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Shooter::Fire() {
-	left_wheel->Set(-1.0);
-	right_wheel->Set(1.0);
+	left_wheel->Set(-1);
+	right_wheel->Set(1);
+}
+
+void Shooter::Load() {
+	left_wheel->Set(0.5);
+	right_wheel->Set(-0.5);
 }
 
 void Shooter::Stop() {

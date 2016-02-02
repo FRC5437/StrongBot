@@ -3,6 +3,7 @@
 #include "Commands/TargetAndShoot.h"
 #include "Commands/Target.h"
 #include "Commands/ShootBoulder.h"
+#include "Commands/LoadBoulder.h"
 
 OI::OI()
 {
@@ -15,8 +16,8 @@ OI::OI()
 	b22 = new JoystickButton(joy2, 2);
 
 	b11->WhenPressed(new TargetAndShoot());
-	b21->ToggleWhenPressed(new ShootBoulder());
-	b22->WhenPressed(new Target());
+	b21->WhenPressed(new ShootBoulder());
+	b22->WhenPressed(new LoadBoulder());
 	//b2->WhenPressed();
 }
 

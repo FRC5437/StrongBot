@@ -13,7 +13,9 @@ public:
 	Shooter();
 	void InitDefaultCommand();
 	void Fire();
+	void Load();
 	void Stop();
+
 };
 
 #endif

@@ -10,9 +10,11 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 public:
+	double targetx;
 	Targeting();
 	void InitDefaultCommand();
-	void FindTarget();
+	void SetTarget(double targetX);
+	double Report();
 };
 
 #endif

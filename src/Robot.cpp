@@ -10,7 +10,7 @@ class Robot: public IterativeRobot
 private:
 	std::unique_ptr<Command> autonomousCommand;
 	//SendableChooser *chooser;
-	AHRS* ahrs;
+	//AHRS* ahrs;
 
 	void RobotInit()
 	{
@@ -21,25 +21,16 @@ private:
 		//SmartDashboard::PutData("Auto Modes", chooser);
 		//std::array* width;
 
-		//CameraServer::GetInstance()->SetQuality(50);
-		//CameraServer::GetInstance()->StartAutomaticCapture("cam0");
-	try {
-				/* Communicate w/navX MXP via the MXP SPI Bus.                                       */
-				/* Alternatively:  I2C::Port::kMXP, SerialPort::Port::kMXP or SerialPort::Port::kUSB */
-				/* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details.   */
-				ahrs = new AHRS(SPI::Port::kMXP);
-			} catch (std::exception ex ) {
-				std::string err_string = "Error instantiating navX MXP:  ";
-				err_string += ex.what();
-				DriverStation::ReportError(err_string.c_str());
-			}
-	}
+
+		//ahrs = new AHRS(SPI::Port::kMXP);
+
 
 	/**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
      */
+	}
 	void DisabledInit()
 	{
 	}
@@ -91,7 +82,7 @@ private:
 	void TeleopPeriodic()
 	{
 		Scheduler::GetInstance()->Run();
-		double yaw=ahrs->GetYaw();
+		//double yaw=ahrs->GetYaw();
 	}
 
 	void TestPeriodic()

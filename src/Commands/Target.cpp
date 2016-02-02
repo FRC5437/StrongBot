@@ -4,6 +4,7 @@ Target::Target()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
+	Requires(targeting);
 }
 std::shared_ptr<NetworkTable> grip;
 extern double target_x;
@@ -31,8 +32,8 @@ void Target::Execute()
 				return;
 		}
 
-	    target_x = targetX;
-	    SmartDashboard::PutNumber("target", target_x);
+	    targeting->SetTarget(targetX);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
