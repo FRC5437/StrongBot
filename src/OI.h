@@ -2,7 +2,6 @@
 #define OI_H
 
 #include "WPILib.h"
-#include "AHRS.h"
 
 
 class OI

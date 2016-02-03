@@ -13,7 +13,7 @@ public:
 	double targetx;
 	Targeting();
 	void InitDefaultCommand();
-	void SetTarget(double targetX);
+	void SetTarget();
 	double Report();
 };
 

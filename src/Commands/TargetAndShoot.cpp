@@ -28,7 +28,7 @@ TargetAndShoot::TargetAndShoot()
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	//targeting->Report();
+	CommandBase::targeting->Report();
 
 	if (targetX < CENTER_X - TOLERANCE_X) {
 		AddSequential(new RobotTurnLeft());
