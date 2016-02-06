@@ -6,6 +6,7 @@
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Targeting.h"
+#include "Subsystems/NavX.h"
 #include "OI.h"
 #include "WPILib.h"
 
@@ -25,6 +26,7 @@ public:
 	static DriveSubsystem* drivesubsystem;
 	static Shooter* shooter;
 	static Targeting* targeting;
+	static NavX* navx;
 };
 
 #endif

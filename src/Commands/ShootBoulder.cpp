@@ -1,12 +1,11 @@
 #include "ShootBoulder.h"
-bool fired = false;
 
 ShootBoulder::ShootBoulder()
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(shooter);
-	SetTimeout(3);
+	SetTimeout(1);
 }
 
 // Called just before this Command runs the first time
@@ -19,7 +18,6 @@ void ShootBoulder::Initialize()
 void ShootBoulder::Execute()
 {
 	shooter->Fire();
-
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -31,6 +29,9 @@ bool ShootBoulder::IsFinished()
 // Called once after isFinished returns true
 void ShootBoulder::End()
 {
+	shooter->Retract();
+	std::chrono::milliseconds timespan(1000);
+	std::this_thread::sleep_for(timespan);
 	shooter->Stop();
 }
 

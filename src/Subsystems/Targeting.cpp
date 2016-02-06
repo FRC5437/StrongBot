@@ -32,12 +32,10 @@ void Targeting::SetTarget() {
 
    if (targetArea >= 0.0) {
       targetx = temp;
-      SmartDashboard::PutNumber("chh - target", targetx);
    }
 }
 
 double Targeting::Report() {
-	SmartDashboard::PutNumber("target", targetx);
 	return targetx;
 
 }

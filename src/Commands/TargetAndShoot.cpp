@@ -1,43 +1,55 @@
 #include "TargetAndShoot.h"
-#include "Commands/RobotTurnLeft.h"
-#include "Commands/RobotTurnRight.h"
-#include "Commands/ShootBoulder.h"
-#include "../CommandBase.h"
 
-
-const double CENTER_X = 240.0;
-const double TOLERANCE_X = 20.0;
 double targetX;
+bool fired = false;
 
+const double centerX = 120.0;
+const double tolX = 20.0;
 TargetAndShoot::TargetAndShoot()
 {
-
-	// Add Commands here:
-	// e.g. AddSequential(new Command1());
-	//      AddSequential(new Command2());
-	// these will run in order.
-
-	// To run multiple commands at the same time,
-	// use AddParallel()
-	// e.g. AddParallel(new Command1());
-	//      AddSequential(new Command2());
-	// Command1 and Command2 will run in parallel.
-
-	// A command group will require all of the subsystems that each member
-	// would require.
-	// e.g. if Command1 requires chassis, and Command2 requires arm,
-	// a CommandGroup containing them would require both the chassis and the
-	// arm.
-	CommandBase::targeting->Report();
-
-	if (targetX < CENTER_X - TOLERANCE_X) {
-		AddSequential(new RobotTurnLeft());
-	} else if (targetX > CENTER_X + TOLERANCE_X) {
-		AddSequential(new RobotTurnRight());
-	} else {
-		//AddSequential(new ShootBoulder());
-		return;
-	}
-
+	// Use Requires() here to declare subsystem dependencies
+	// eg. Requires(chassis);
+	Requires(targeting);
+	Requires(drivesubsystem);
+	Requires(shooter);
 }
 
+// Called just before this Command runs the first time
+void TargetAndShoot::Initialize()
+{
+	targetX = 0.0;
+}
+
+// Called repeatedly when this Command is scheduled to run
+void TargetAndShoot::Execute()
+{
+	targetX = targeting->Report();
+	if (targetX < centerX - tolX) {
+		drivesubsystem->Drive(0.5, -0.5);
+	} else if (targetX > centerX + tolX) {
+		drivesubsystem->Drive(-0.5, 0.5);
+	} else {
+		fired = true;
+		drivesubsystem->Drive(0.0, 0.0);
+		shooter->Fire();
+	}
+}
+
+// Make this return true when this Command no longer needs to run execute()
+bool TargetAndShoot::IsFinished()
+{
+	return fired;
+}
+
+// Called once after isFinished returns true
+void TargetAndShoot::End()
+{
+	fired = false;
+}
+
+// Called when another command which requires one or more of the same
+// subsystems is scheduled to run
+void TargetAndShoot::Interrupted()
+{
+
+}

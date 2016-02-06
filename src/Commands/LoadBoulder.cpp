@@ -17,6 +17,7 @@ void LoadBoulder::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void LoadBoulder::Execute()
 {
+	shooter->Retract();
 	shooter->Load();
 
 }

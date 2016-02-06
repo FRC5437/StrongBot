@@ -2,6 +2,9 @@
 //#include "AHRS.h"
 #include "Commands/Command.h"
 #include "Commands/DriveRobot.h"
+#include "Commands/RoughTerrain.h"
+#include "Commands/ShootBoulder.h"
+#include "Commands/TalonSet.h"
 #include "CommandBase.h"
 #include "RobotMap.h"
 
@@ -9,16 +12,17 @@ class Robot: public IterativeRobot
 {
 private:
 	std::unique_ptr<Command> autonomousCommand;
-	//SendableChooser *chooser;
+	std::unique_ptr<Command> driverefresh;
+	SendableChooser *chooser;
 	//AHRS* ahrs;
 
 	void RobotInit()
 	{
 		CommandBase::init();
-		//chooser = new SendableChooser();
-		//chooser->AddDefault("Default Auto", new ExampleCommand());
-		//chooser->AddObject("My Auto", new MyAutoCommand());
-		//SmartDashboard::PutData("Auto Modes", chooser);
+		chooser = new SendableChooser();
+		chooser->AddDefault("Default Auto", new RoughTerrain());
+		chooser->AddObject("My Auto", new ShootBoulder());
+		SmartDashboard::PutData("Auto Modes", chooser);
 		//std::array* width;
 
 
@@ -33,6 +37,8 @@ private:
 	}
 	void DisabledInit()
 	{
+		driverefresh.reset((Command *)new TalonSet());
+		driverefresh->Start();
 	}
 
 	void DisabledPeriodic()
@@ -58,7 +64,7 @@ private:
 			autonomousCommand.reset(new ExampleCommand());
 		} */
 
-		//autonomousCommand.reset((Command *)chooser->GetSelected());
+		autonomousCommand.reset((Command *)chooser->GetSelected());
 
 		if (autonomousCommand != NULL)
 			autonomousCommand->Start();

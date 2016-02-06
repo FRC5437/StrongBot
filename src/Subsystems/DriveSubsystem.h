@@ -15,6 +15,7 @@ public:
 	void InitDefaultCommand();
 	void Drive(double left, double right);
 	void Drive(Joystick* joy1, Joystick* joy2);
+	void Disabled();
 };
 
 #endif

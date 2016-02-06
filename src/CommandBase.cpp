@@ -2,6 +2,7 @@
 #include "Subsystems/DriveSubsystem.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Targeting.h"
+#include "Subsystems/NavX.h"
 #include "Commands/Scheduler.h"
 
 // Initialize a single static instance of all of your subsystems to NULL
@@ -9,6 +10,7 @@ DriveSubsystem* CommandBase::drivesubsystem = NULL;
 Shooter* CommandBase::shooter = NULL;
 Targeting* CommandBase::targeting = NULL;
 OI* CommandBase::oi = NULL;
+NavX* CommandBase::navx = NULL;
 
 CommandBase::CommandBase(const std::string &name) :
 		Command(name)
@@ -29,4 +31,5 @@ void CommandBase::init()
 	targeting = new Targeting();
 	oi = new OI();
 	drivesubsystem = new DriveSubsystem();
+	navx = new NavX();
 }

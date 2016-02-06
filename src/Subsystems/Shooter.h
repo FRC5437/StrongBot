@@ -13,6 +13,9 @@ public:
 	Shooter();
 	void InitDefaultCommand();
 	void Fire();
+	void Prep();
+	void Maintain();
+	void Retract();
 	void Load();
 	void Stop();
 
