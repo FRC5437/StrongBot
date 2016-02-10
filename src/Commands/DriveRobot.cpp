@@ -11,7 +11,6 @@ DriveRobot::DriveRobot() : CommandBase("DriveRobot")
 // Called just before this Command runs the first time
 void DriveRobot::Initialize()
 {
-
 }
 
 // Called repeatedly when this Command is scheduled to run

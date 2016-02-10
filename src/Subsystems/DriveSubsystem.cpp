@@ -21,6 +21,7 @@ DriveSubsystem::DriveSubsystem() :
 	right_slave->SetControlMode(CANSpeedController::kFollower);
 	right_slave->Set(2);
 	myDrive = new RobotDrive(left_motor,right_motor);
+	myDrive->SetSafetyEnabled(false);
 }
 
 void DriveSubsystem::InitDefaultCommand()
