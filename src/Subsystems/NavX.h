@@ -12,6 +12,7 @@ private:
 	// for methods that implement subsystem capabilities
 public:
 	NavX();
+	AHRS* ahrs;
 	void InitDefaultCommand();
 };
 

@@ -11,7 +11,7 @@ private:
 	JoystickButton* b11;
 	JoystickButton* b2;
 	Joystick* joy2;
-	//JoystickButton* b21;
+	JoystickButton* b21;
 	//JoystickButton* b22;
 	//JoystickButton* b23;
 	Joystick* joy3;

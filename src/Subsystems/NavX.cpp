@@ -1,7 +1,6 @@
 #include "NavX.h"
 #include "../RobotMap.h"
 
-AHRS* ahrs;
 NavX::NavX() : Subsystem("ExampleSubsystem") {
 	ahrs = new AHRS(SPI::Port::kMXP);
 }

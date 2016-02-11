@@ -6,6 +6,7 @@
 #include "Commands/LoadBoulder.h"
 #include "Commands/PrepBoulder.h"
 #include "Commands/RumbleTest.h"
+#include "Commands/RotateToAngle.h"
 
 OI::OI()
 {
@@ -16,7 +17,7 @@ OI::OI()
 	b11 = new JoystickButton(joy1, 1);
 	b2 = new JoystickButton(joy1, 2);
 	joy2 = new Joystick(1);
-	//b21 = new JoystickButton(joy2, 1);
+	b21 = new JoystickButton(joy2, 1);
 	//b22 = new JoystickButton(joy2, 2);
 	//b23 = new JoystickButton(joy2, 3);
 	joy3 = new Joystick(2);
@@ -26,7 +27,7 @@ OI::OI()
 	b34 = new JoystickButton(joy3, 4);
 
 	b11->WhenPressed(new TargetAndShoot());
-	//b31->WhenPressed(new ShootBoulder());
+	b21->WhenPressed(new RotateToAngle(30));
 	b31->WhenPressed(new PrepBoulder());
 	b32->WhenPressed(new LoadBoulder());
 	b33->WhenPressed(new ShootBoulder());
