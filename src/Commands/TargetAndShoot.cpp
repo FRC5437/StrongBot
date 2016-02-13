@@ -26,12 +26,14 @@ void TargetAndShoot::Execute()
 	targetX = targeting->Report();
 	if (targetX < centerX - tolX) {
 		drivesubsystem->Drive(0.5, -0.5);
+		Wait(0.05);
 	} else if (targetX > centerX + tolX) {
 		drivesubsystem->Drive(-0.5, 0.5);
+		Wait(0.05);
 	} else {
 		fired = true;
 		drivesubsystem->Drive(0.0, 0.0);
-		shooter->Fire();
+		//shooter->Fire();
 	}
 }
 

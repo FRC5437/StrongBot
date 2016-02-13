@@ -14,6 +14,10 @@ public:
 	NavX();
 	AHRS* ahrs;
 	void InitDefaultCommand();
+	void YawZero();
+	int YawGet360();
+	double PitchGet();
+	double XDisplace();
 };
 
 #endif

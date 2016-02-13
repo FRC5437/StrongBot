@@ -7,7 +7,7 @@
 class RotateToAngle: public CommandBase
 {
 public:
-	RotateToAngle(double degrees);
+	RotateToAngle(int degrees);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

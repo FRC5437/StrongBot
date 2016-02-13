@@ -17,6 +17,7 @@ void DriveRobot::Initialize()
 void DriveRobot::Execute()
 {
 	drivesubsystem->Drive(oi->GetJoystick1(), oi->GetJoystick2());
+	drivesubsystem->EncPos();
 }
 
 // Make this return true when this Command no longer needs to run execute()

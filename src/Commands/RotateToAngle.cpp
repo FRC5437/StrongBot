@@ -1,35 +1,41 @@
 #include "RotateToAngle.h"
 #include "CommandBase.h"
 
-double degrees, initDegrees;
+int degrees;
+int initDegrees;
 int turnDegrees;
 bool rightDir;
+int x;
 
-RotateToAngle::RotateToAngle(double targetDegrees)
+RotateToAngle::RotateToAngle(int targetDegrees)
 {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(chassis);
 	Requires(drivesubsystem);
+	Requires(navx);
 	degrees = targetDegrees;
+	initDegrees = 180;
 }
 
 // Called just before this Command runs the first time
 void RotateToAngle::Initialize()
 {
-	CommandBase::navx->ahrs->ZeroYaw();
-	initDegrees = CommandBase::navx->ahrs->GetYaw();
+	navx->ahrs->ZeroYaw();
+	Wait(0.08);
+	initDegrees = (navx->YawGet360());
 	turnDegrees = initDegrees+degrees;
-	if (turnDegrees > (initDegrees + 180)) {
+	if (turnDegrees > initDegrees) {
 		rightDir = true;
 	}
 
-	if (turnDegrees >= 180) {
-		turnDegrees = (turnDegrees + 180) % 360 - 180;
+	if (turnDegrees >= 360) {
+		turnDegrees = turnDegrees % 360;
 	}
 
-	if (turnDegrees <= -180) {
-		turnDegrees = (turnDegrees - 180) % 360 + 180;
+	if (turnDegrees <= 0) {
+		turnDegrees = turnDegrees % 360 + 360;
 	}
+	x = x+1;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -43,9 +49,6 @@ void RotateToAngle::Execute()
 		drivesubsystem->Drive(0.0, 0.0);
 	}
 	Wait(0.05);
-	SmartDashboard::PutNumber("initdegrees", initDegrees);
-	SmartDashboard::PutNumber("turndegrees", turnDegrees);
-	SmartDashboard::PutNumber("yaw", CommandBase::navx->ahrs->GetYaw());
 
 
 }
@@ -53,7 +56,7 @@ void RotateToAngle::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool RotateToAngle::IsFinished()
 {
-	return ((CommandBase::navx->ahrs->GetYaw()) <= (turnDegrees + 5.0) && (CommandBase::navx->ahrs->GetYaw()) >= (turnDegrees - 5.0));
+	return ((navx->YawGet360()) <= (turnDegrees + 3) && (navx->YawGet360()) >= (turnDegrees - 3));
 }
 
 // Called once after isFinished returns true
@@ -66,5 +69,5 @@ void RotateToAngle::End()
 // subsystems is scheduled to run
 void RotateToAngle::Interrupted()
 {
-
+	navx->YawZero();
 }

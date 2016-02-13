@@ -6,7 +6,9 @@
 #include "Commands/LoadBoulder.h"
 #include "Commands/PrepBoulder.h"
 #include "Commands/RumbleTest.h"
-#include "Commands/RotateToAngle.h"
+#include "Commands/AutoPos4.h"
+//#include "Commands/RotateToAngle.h"
+//#include "Commands/RampCheck.h"
 
 OI::OI()
 {
@@ -15,10 +17,10 @@ OI::OI()
 	// Process operator interface input here.
 	joy1 = new Joystick(0);
 	b11 = new JoystickButton(joy1, 1);
-	b2 = new JoystickButton(joy1, 2);
+	//b12 = new JoystickButton(joy1, 2);
 	joy2 = new Joystick(1);
 	b21 = new JoystickButton(joy2, 1);
-	//b22 = new JoystickButton(joy2, 2);
+	b22 = new JoystickButton(joy2, 2);
 	//b23 = new JoystickButton(joy2, 3);
 	joy3 = new Joystick(2);
 	b31 = new JoystickButton(joy3, 1);
@@ -27,7 +29,8 @@ OI::OI()
 	b34 = new JoystickButton(joy3, 4);
 
 	b11->WhenPressed(new TargetAndShoot());
-	b21->WhenPressed(new RotateToAngle(30));
+	b21->WhenPressed(new AutoPos4());
+	//b22->WhenPressed(new RampCheck());
 	b31->WhenPressed(new PrepBoulder());
 	b32->WhenPressed(new LoadBoulder());
 	b33->WhenPressed(new ShootBoulder());
