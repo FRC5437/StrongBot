@@ -18,7 +18,6 @@ void PrepBoulder::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void PrepBoulder::Execute()
 {
-	shooter->Maintain();
 	shooter->Prep();
 }
 

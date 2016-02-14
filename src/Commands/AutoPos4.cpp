@@ -24,10 +24,10 @@ AutoPos4::AutoPos4()
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddParallel(new PrepBoulder());
-	AddParallel(new Target());
 	AddSequential(new RampCheck());
-	AddSequential(new RotateToAngle(-14));
+	//AddSequential(new RotateToAngle(-14));
+	Wait(0.3);
+	AddSequential(new PrepBoulder());
 	AddSequential(new TargetAndShoot());
 	Wait(0.5);
 	AddSequential(new ShootBoulder());

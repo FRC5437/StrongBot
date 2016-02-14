@@ -2,11 +2,11 @@
 #include "../RobotMap.h"
 #include "Commands/Target.h"
 
-std::shared_ptr<NetworkTable> grip;
+//std::shared_ptr<NetworkTable> grip;
 
 Targeting::Targeting() : Subsystem("targeting") {
 	targetx = 0.0;
-	grip = NetworkTable::GetTable("GRIP");
+	//grip = NetworkTable::GetTable("GRIP");
 }
 
 void Targeting::InitDefaultCommand()
@@ -19,7 +19,7 @@ void Targeting::InitDefaultCommand()
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Targeting::SetTarget() {
-   auto areas = grip->GetNumberArray("myContoursReport/width", llvm::ArrayRef<double>()),
+   /*auto areas = grip->GetNumberArray("myContoursReport/width", llvm::ArrayRef<double>()),
    centerX = grip->GetNumberArray("myContoursReport/centerX", llvm::ArrayRef<double>());
 
    double targetArea = -1.0, temp = 0.0;
@@ -32,7 +32,7 @@ void Targeting::SetTarget() {
 
    if (targetArea >= 0.0) {
       targetx = temp;
-   }
+   }*/
 }
 
 double Targeting::Report() {

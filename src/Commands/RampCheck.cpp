@@ -43,7 +43,7 @@ void RampCheck::Execute()
 	}*/
 
 	drivesubsystem->Drive(0.75, 0.75);
-	Wait(4.25);
+	Wait(4.3);
 	drivesubsystem->Drive(0.0, 0.0);
 	finished = true;
 }
